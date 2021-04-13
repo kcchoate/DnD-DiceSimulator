@@ -30,7 +30,7 @@ namespace DiceSimulator.ConsoleApp
         static void SimulateWeapon(int iterations, int numberOfDice, int diceSides, bool hasGreaterWeaponMaster, string weaponName, IHost host)
         {
             var diceRoller = host.Services.GetService<IDiceRoller>();
-            var features = hasGreaterWeaponMaster ? new[] { host.Services.GetService<GreaterWeaponMaster>() } : null;
+            var features = hasGreaterWeaponMaster ? new[] { host.Services.GetService<GreatWeaponFighting>() } : null;
             var results = Enumerable.Range(0, iterations).Select(x => diceRoller.RollDice(numberOfDice, diceSides, features));
             var average = results.Average(x => x.Sum());
             Console.WriteLine($"Average {weaponName} roll {(hasGreaterWeaponMaster ? "with" : "without")} Greater Weapon Master: {average}");
@@ -43,7 +43,7 @@ namespace DiceSimulator.ConsoleApp
                     services.AddSingleton<IRandomNumberGenerator, RandomBackedRandomNumberGenerator>()
                             .AddSingleton<Random>()
                             .AddTransient<IDiceRoller, DiceRoller>()
-                            .AddTransient<GreaterWeaponMaster>());
+                            .AddTransient<GreatWeaponFighting>());
         
     }
 }

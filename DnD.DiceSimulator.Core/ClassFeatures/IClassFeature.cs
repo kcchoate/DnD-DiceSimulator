@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnD.DiceSimulator.Core.ClassFeatures
+﻿namespace DnD.DiceSimulator.Core.ClassFeatures
 {
     public interface IClassFeature
     {
-        int ModifyDiceRoll(int rolledValue, int diceSides);
+        /// <summary>
+        /// Given an already <paramref name="rolledValue"/>, this method will return a modified value as implemented by the class feature.
+        /// </summary>
+        /// <param name="rolledValue">The value already rolled.</param>
+        /// <param name="diceSides">The number of sides the rolled die had.</param>
+        /// <returns>An updated value for the die roll.</returns>
+        int ModifyDieRoll(int rolledValue, int diceSides);
     }
 }
