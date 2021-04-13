@@ -27,11 +27,11 @@ namespace DiceSimulator.ConsoleApp
             SimulateWeapon(iterations, 1, 12, true, "Greataxe", host);
         }
 
-        static void SimulateWeapon(int iterations, int numberOfDice, int diceSides, bool hasGreaterWeaponMaster, string weaponName, IHost host)
+        static void SimulateWeapon(int iterations, int numberOfDice, int dieSides, bool hasGreaterWeaponMaster, string weaponName, IHost host)
         {
             var diceRoller = host.Services.GetService<IDiceRoller>();
             var features = hasGreaterWeaponMaster ? new[] { host.Services.GetService<GreatWeaponFighting>() } : null;
-            var results = Enumerable.Range(0, iterations).Select(x => diceRoller.RollDice(numberOfDice, diceSides, features));
+            var results = Enumerable.Range(0, iterations).Select(x => diceRoller.RollDice(numberOfDice, dieSides, features));
             var average = results.Average(x => x.Sum());
             Console.WriteLine($"Average {weaponName} roll {(hasGreaterWeaponMaster ? "with" : "without")} Greater Weapon Master: {average}");
 

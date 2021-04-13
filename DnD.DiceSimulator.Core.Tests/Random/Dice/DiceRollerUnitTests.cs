@@ -63,7 +63,7 @@ namespace DnD.DiceSimulator.Core.Tests.Random.Dice
             _rng.Setup(x => x.GetInt(It.IsAny<int>(), It.IsAny<int>())).Returns(expectedRandomValue);
 
             var mockFeature = new Mock<IClassFeature>();
-            mockFeature.Setup(x => x.ModifyDieRoll(It.IsAny<int>(), It.IsAny<int>())).Returns((int rolledValue, int diceSides) => rolledValue + classFeatureModifier);
+            mockFeature.Setup(x => x.ModifyDieRoll(It.IsAny<int>(), It.IsAny<int>())).Returns((int rolledValue, int _) => rolledValue + classFeatureModifier);
 
             //Act
             var result = _roller.RollDie(6, new[] { mockFeature.Object });
@@ -88,7 +88,7 @@ namespace DnD.DiceSimulator.Core.Tests.Random.Dice
                 .Returns(secondExpectedRandomValue);
 
             var mockFeature = new Mock<IClassFeature>();
-            mockFeature.Setup(x => x.ModifyDieRoll(It.IsAny<int>(), It.IsAny<int>())).Returns((int rolledValue, int diceSides) => rolledValue + classFeatureModifier);
+            mockFeature.Setup(x => x.ModifyDieRoll(It.IsAny<int>(), It.IsAny<int>())).Returns((int rolledValue, int _) => rolledValue + classFeatureModifier);
 
             //Act
             var result = _roller.RollDice(numberOfDice, 6, new[] { mockFeature.Object }).ToArray();
